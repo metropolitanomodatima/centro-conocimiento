@@ -19,7 +19,7 @@ estado: vigente
 autor: Comisión Jurídica MODATIMA
 
 fecha_creacion: 2026-01-20
-ultima_actualizacion: 2026-05-01
+ultima_actualizacion: 2026-07-07
 
 relacionados:
   - argumentario.agua.derecho-humano

@@ -51,7 +51,7 @@ export default function Menu() {
       </div>
 
       <div className="border-t border-tierra-100 bg-white">
-        <div className="contenedor flex gap-2 overflow-x-auto py-2 text-xs">
+        <div className="contenedor sin-scrollbar flex gap-2 overflow-x-auto py-2 text-xs">
           {CATEGORIAS.map((c) => (
             <NavLink
               key={c.tipo}

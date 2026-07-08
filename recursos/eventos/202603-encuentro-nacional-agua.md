@@ -42,11 +42,9 @@ campaña:
 etiquetas:
   - encuentro
   - agua
-  - Petorca
 
 relacionados:
   - organizacion.modatima
-  - territorio.petorca
 
 adjuntos:
 

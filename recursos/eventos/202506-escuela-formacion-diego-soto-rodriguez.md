@@ -8,8 +8,8 @@ nombre: Escuela de formación Diego Soto rodriguez
 categoria:
   - encuentro
 
-fecha_inicio: julio 2025
-fecha_fin: julio 2025
+fecha_inicio: 2025-07-26
+fecha_fin: 2025-05-28
 
 hora: 09:00
 

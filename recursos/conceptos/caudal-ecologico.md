@@ -23,7 +23,6 @@ ultima_actualizacion: 2026-05-01
 
 relacionados:
   - concepto.derecho-humano-agua
-  - cuenca.rio-petorca
 
 fuentes:
   - "Poff et al., 1997 — The natural flow regime"

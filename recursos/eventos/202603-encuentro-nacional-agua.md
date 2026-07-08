@@ -16,7 +16,14 @@ hora: 09:00
 ubicacion: La Ligua, Región de Valparaíso, Chile
 
 territorio:
-  - territorio.petorca
+  - territorio.santiago
+  - territorio.valparaiso
+  - territorio.wallmapu
+  - territorio.coquimbo
+  - territorio.pirque
+  - territorio.valdivia
+  - territorio.lo-barnechea
+  - territorio.antofagasta
 
 organizador: MODATIMA
 
@@ -35,11 +42,9 @@ campaña:
 etiquetas:
   - encuentro
   - agua
-  - Petorca
 
 relacionados:
   - organizacion.modatima
-  - territorio.petorca
 
 adjuntos:
 

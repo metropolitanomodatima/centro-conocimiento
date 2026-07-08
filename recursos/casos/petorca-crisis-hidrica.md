@@ -19,6 +19,7 @@ actores:
   - Dirección General de Aguas
   - MODATIMA
 
+resumen: Crisis socioambiental prolongada caracterizada por la falta de acceso al agua para consumo humano en paralelo a la expansión de la agroindustria de paltos.
 fecha_inicio: 2004-01-01
 fecha_fin:
 
@@ -39,12 +40,6 @@ adjuntos:
 fuentes:
   - "Reportajes CIPER, INDH y organismos internacionales"
 ---
-
-## Resumen
-
-Crisis socioambiental prolongada en la provincia de Petorca, caracterizada
-por la falta de acceso al agua para consumo humano en paralelo a la
-expansión de la agroindustria de paltos.
 
 ## Contexto
 

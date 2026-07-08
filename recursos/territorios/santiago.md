@@ -33,8 +33,6 @@ casos:
 
 campañas:
 
-cuencas: cuenca.rio-maipo
-
 etiquetas:
   - Región Metropolitana
   - Gran Santiago
@@ -43,7 +41,8 @@ etiquetas:
 
 relacionados:
   - territorio.pirque
-  - argumentario.agua.derecho-humano
+  - territorio.lo-barnechea
+  - cuenca.rio-maipo
 
 adjuntos:
 

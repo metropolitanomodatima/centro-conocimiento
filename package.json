@@ -1,0 +1,9 @@
+{
+  "name": "biblioteca-saberes-api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "dependencies": {
+    "@vercel/node": "^3.2.29"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "buildCommand": "cd sitio && npm install && npm run build",
   "outputDirectory": "sitio/dist",
-  "installCommand": "echo skip",
+  "installCommand": "npm install && cd sitio && npm install",
   "rewrites": [
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]

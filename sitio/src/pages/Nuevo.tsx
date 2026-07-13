@@ -18,7 +18,7 @@ export default function Nuevo() {
           href={urlLogin()}
           className="inline-block rounded-md bg-rio-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-rio-700 no-underline"
         >
-          Iniciar sesión con GitHub
+          Autentícate
         </a>
       </div>
     );

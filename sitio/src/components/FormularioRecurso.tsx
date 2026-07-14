@@ -4,6 +4,7 @@ import type { EntradaIndice } from '@/types/recurso';
 import type { PayloadRecurso } from '@/services/recursoEditor';
 import { useFormularioRecurso } from '@/controllers/useFormularioRecurso';
 import { cargarIndice } from '@/services/indice';
+import RenderizadorMarkdown from '@/components/RenderizadorMarkdown';
 
 const CAMPOS_BASE = new Set(['id', 'titulo', 'tipo', 'resumen', 'relacionados']);
 
@@ -180,6 +181,8 @@ export default function FormularioRecurso({ modoEdicion, onCancelar }: Props) {
     enviando, error, prUrl, submit,
   } = useFormularioRecurso(modoEdicion);
 
+  const [pestana, setPestana] = useState<'editar' | 'previa'>('editar');
+
   if (prUrl) {
     return (
       <div className="rounded-xl border border-green-200 bg-green-50 p-6 text-center">
@@ -201,8 +204,40 @@ export default function FormularioRecurso({ modoEdicion, onCancelar }: Props) {
   const camposTextoPlantilla = camposExtra.filter((c) => c.tipo !== 'lista');
   const camposListaPlantilla = camposExtra.filter((c) => c.tipo === 'lista');
 
+  const tabClass = (tab: 'editar' | 'previa') =>
+    `px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
+      pestana === tab
+        ? 'border-rio-600 text-rio-700'
+        : 'border-transparent text-tierra-500 hover:text-tierra-800'
+    }`;
+
   return (
+    <div>
+      {/* Pestañas */}
+      <div className="mb-6 flex gap-1 border-b border-tierra-200">
+        <button type="button" className={tabClass('editar')} onClick={() => setPestana('editar')}>
+          Editar
+        </button>
+        <button type="button" className={tabClass('previa')} onClick={() => setPestana('previa')}>
+          Vista previa
+        </button>
+      </div>
+
+      {/* Vista previa */}
+      {pestana === 'previa' && (
+        <div>
+          <h1 className="font-serif text-3xl font-bold leading-tight text-tierra-900 mb-2">
+            {estado.titulo || <span className="text-tierra-300">Sin título</span>}
+          </h1>
+          {estado.resumen && (
+            <p className="mt-2 mb-6 text-lg leading-relaxed text-tierra-700">{estado.resumen}</p>
+          )}
+          <RenderizadorMarkdown contenido={estado.cuerpo} />
+        </div>
+      )}
+
     <form
+      style={{ display: pestana === 'editar' ? undefined : 'none' }}
       onSubmit={(e) => { e.preventDefault(); submit(); }}
       className="space-y-6"
     >
@@ -369,5 +404,6 @@ export default function FormularioRecurso({ modoEdicion, onCancelar }: Props) {
         )}
       </div>
     </form>
+    </div>
   );
 }

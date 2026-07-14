@@ -3,11 +3,14 @@ import { Link, useParams } from 'react-router-dom';
 import Cargando from '@/components/Cargando';
 import ErrorMensaje from '@/components/ErrorMensaje';
 import TarjetaRecurso from '@/components/TarjetaRecurso';
+import FilaRecurso from '@/components/FilaRecurso';
+import ToggleVista from '@/components/ToggleVista';
 import Etiqueta from '@/components/Etiqueta';
 import { buscarCategoriaPorSlug } from '@/types/recurso';
 import type { EntradaIndice } from '@/types/recurso';
 import { extraerFacetas, listarPorTipo } from '@/services/indice';
 import { useTiposVisibles } from '@/controllers/useTiposVisibles';
+import { useVistaLista } from '@/controllers/useVistaLista';
 import { urlLogin } from '@/services/sesion';
 
 export default function Categoria() {
@@ -21,6 +24,7 @@ export default function Categoria() {
   const [error, setError] = useState<string | null>(null);
 
   const usaRegion = categoria?.tipo === 'cuenca' || categoria?.tipo === 'territorio';
+  const { lista, alternar } = useVistaLista();
 
   useEffect(() => {
     if (!categoria || tiposVisibles === undefined) return;
@@ -239,19 +243,22 @@ export default function Categoria() {
         </div>
       ) : (
         <>
-          <div className="flex flex-wrap items-center gap-2">
-            {filtroTema && (
-              <Etiqueta texto={`Tema: ${filtroTema}`} tipo="tema" />
-            )}
-            {!usaRegion && filtroTerritorio && (
-              <Etiqueta texto={`Territorio: ${filtroTerritorio}`} tipo="territorio" />
-            )}
-            {usaRegion && filtroRegion && (
-              <Etiqueta texto={`Región: ${filtroRegion}`} tipo="territorio" />
-            )}
-            <span className="text-sm text-tierra-500">
-              {filtrados.length} de {items.length}
-            </span>
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              {filtroTema && (
+                <Etiqueta texto={`Tema: ${filtroTema}`} tipo="tema" />
+              )}
+              {!usaRegion && filtroTerritorio && (
+                <Etiqueta texto={`Territorio: ${filtroTerritorio}`} tipo="territorio" />
+              )}
+              {usaRegion && filtroRegion && (
+                <Etiqueta texto={`Región: ${filtroRegion}`} tipo="territorio" />
+              )}
+              <span className="text-sm text-tierra-500">
+                {filtrados.length} de {items.length}
+              </span>
+            </div>
+            <ToggleVista lista={lista} onAlternar={alternar} />
           </div>
           {porRegion ? (
             <div className="space-y-10">
@@ -261,19 +268,25 @@ export default function Categoria() {
                     {region}
                     <span className="ml-2 font-normal normal-case text-tierra-400">({recursos.length})</span>
                   </h2>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {recursos.map((r) => (
-                      <TarjetaRecurso key={r.id} recurso={r} />
-                    ))}
-                  </div>
+                  {lista ? (
+                    <div className="flex flex-col gap-2">
+                      {recursos.map((r) => <FilaRecurso key={r.id} recurso={r} />)}
+                    </div>
+                  ) : (
+                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      {recursos.map((r) => <TarjetaRecurso key={r.id} recurso={r} />)}
+                    </div>
+                  )}
                 </section>
               ))}
             </div>
+          ) : lista ? (
+            <div className="flex flex-col gap-2">
+              {filtrados.map((r) => <FilaRecurso key={r.id} recurso={r} />)}
+            </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {filtrados.map((r) => (
-                <TarjetaRecurso key={r.id} recurso={r} />
-              ))}
+              {filtrados.map((r) => <TarjetaRecurso key={r.id} recurso={r} />)}
             </div>
           )}
         </>

@@ -4,11 +4,14 @@ import Buscador from '@/components/Buscador';
 import Cargando from '@/components/Cargando';
 import ErrorMensaje from '@/components/ErrorMensaje';
 import TarjetaRecurso from '@/components/TarjetaRecurso';
+import FilaRecurso from '@/components/FilaRecurso';
+import ToggleVista from '@/components/ToggleVista';
 import { CATEGORIAS } from '@/types/recurso';
 import type { EntradaIndice, TipoRecurso } from '@/types/recurso';
 import { buscar, type FiltrosBusqueda } from '@/services/busqueda';
 import { cargarIndice, extraerFacetas, extraerRegiones } from '@/services/indice';
 import { useTiposVisibles } from '@/controllers/useTiposVisibles';
+import { useVistaLista } from '@/controllers/useVistaLista';
 
 export default function Busqueda() {
   const tiposVisibles = useTiposVisibles();
@@ -21,6 +24,7 @@ export default function Busqueda() {
   const [resultados, setResultados] = useState<EntradaIndice[] | null>(null);
   const [todos, setTodos] = useState<EntradaIndice[] | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const { lista, alternar: alternarVista } = useVistaLista();
 
   useEffect(() => {
     if (tiposVisibles === undefined) return;
@@ -197,20 +201,31 @@ export default function Busqueda() {
             </div>
           ) : (
             <>
-              <p className="mb-4 text-sm text-tierra-500">
-                {resultados.length} resultado{resultados.length === 1 ? '' : 's'}
-                {consulta && (
-                  <>
-                    {' '}para{' '}
-                    <em className="font-medium not-italic text-tierra-800">«{consulta}»</em>
-                  </>
-                )}
-              </p>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {resultados.map((r) => (
-                  <TarjetaRecurso key={r.id} recurso={r} />
-                ))}
+              <div className="mb-4 flex items-center justify-between gap-2">
+                <p className="text-sm text-tierra-500">
+                  {resultados.length} resultado{resultados.length === 1 ? '' : 's'}
+                  {consulta && (
+                    <>
+                      {' '}para{' '}
+                      <em className="font-medium not-italic text-tierra-800">«{consulta}»</em>
+                    </>
+                  )}
+                </p>
+                <ToggleVista lista={lista} onAlternar={alternarVista} />
               </div>
+              {lista ? (
+                <div className="flex flex-col gap-2">
+                  {resultados.map((r) => (
+                    <FilaRecurso key={r.id} recurso={r} />
+                  ))}
+                </div>
+              ) : (
+                <div className="grid gap-4 sm:grid-cols-2">
+                  {resultados.map((r) => (
+                    <TarjetaRecurso key={r.id} recurso={r} />
+                  ))}
+                </div>
+              )}
             </>
           )}
         </div>

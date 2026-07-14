@@ -2,50 +2,44 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: evento
 
-nombre:
+nombre: ''
 
-categoria:
-  - reunión
-  - movilización
-  - seminario
-  - taller
-  - conferencia
-  - hito
+categoria: []
 
-fecha_inicio:
-fecha_fin:
+fecha_inicio: ''
+fecha_fin: ''
 
-hora:
+hora: ''
 
-ubicacion:
+ubicacion: ''
 
-territorio:
+territorio: []
 
-organizador:
+organizador: ''
 
-participantes:
+participantes: []
 
-estado:
+estado: ''
 
-temas:
+temas: []
 
-enlace:
+enlace: ''
 
-campaña:
+campaña: ''
 
-etiquetas:
+etiquetas: []
 
-relacionados:
+relacionados: []
 
-adjuntos:
+adjuntos: []
 
-fuentes:
+fuentes: []
 
-ultima_actualizacion:
+ultima_actualizacion: ''
 ---
 ```
 

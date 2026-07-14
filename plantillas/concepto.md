@@ -2,28 +2,28 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: concepto
 
-resumen:
+resumen: ''
 
-tema:
+tema: []
 
-etiquetas:
+etiquetas: []
 
 estado: vigente
 
-autor:
+autor: ''
 
-fecha_creacion:
-ultima_actualizacion:
+fecha_creacion: ''
+ultima_actualizacion: ''
 
-relacionados:
+relacionados: []
 
-adjuntos:
+adjuntos: []
 
-fuentes:
+fuentes: []
 ---
 ```
 

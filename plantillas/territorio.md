@@ -2,52 +2,46 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: territorio
 
-nombre:
+nombre: ''
 
-tipo_territorio:
-  - region
-  - provincia
-  - comuna
-  - localidad
-  - comunidad
+tipo_territorio: []
 
-pais:
-region:
-provincia:
-comuna:
+pais: ''
+region: ''
+provincia: ''
+comuna: ''
 
-ubicacion:
+ubicacion: ''
 
-descripcion:
+descripcion: ''
 
-poblacion:
+poblacion: ''
 
-temas:
+temas: []
 
-organizaciones:
+organizaciones: []
 
-personas:
+personas: []
 
-casos:
+casos: []
 
-campañas:
+campañas: []
 
-cuencas:
+cuencas: []
 
-etiquetas:
+etiquetas: []
 
-relacionados:
+relacionados: []
 
-adjuntos:
+adjuntos: []
 
-fuentes:
+fuentes: []
 
-ultima_actualizacion:
-
+ultima_actualizacion: ''
 ---
 ```
 

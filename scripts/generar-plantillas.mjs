@@ -43,7 +43,9 @@ async function procesarPlantilla(rutaAbs, tipo) {
   const matchBloque = raw.match(/```yaml\s*([\s\S]*?)```/);
   let campos = [];
   if (matchBloque) {
-    const parsed = matter(`---\n${matchBloque[1]}\n---`);
+    const bloque = matchBloque[1].trim();
+    const yamlStr = bloque.startsWith('---') ? bloque : `---\n${bloque}\n---`;
+    const parsed = matter(yamlStr);
     campos = Object.entries(parsed.data).map(([nombre, valor]) => ({
       nombre,
       tipo: inferirTipoCampo(nombre, valor),

@@ -2,27 +2,21 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: organizacion
 
-nombre:
+pais: ''
 
-sigla:
+sitio_web: ''
 
-pais:
+redes_sociales: []
 
-territorio:
+estado: ''
 
-sitio_web:
+etiquetas: []
 
-redes_sociales:
-
-estado:
-
-etiquetas:
-
-relacionados:
+relacionados: []
 ---
 ```
 

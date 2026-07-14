@@ -2,28 +2,28 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: campaña
 
-estado:
+estado: ''
 
-tema:
+tema: []
 
-territorio:
+territorio: []
 
-inicio:
-termino:
+inicio: ''
+termino: ''
 
-coordinador:
+coordinador: ''
 
-organizaciones:
+organizaciones: []
 
-etiquetas:
+etiquetas: []
 
-relacionados:
+relacionados: []
 
-adjuntos:
+adjuntos: []
 ---
 ```
 

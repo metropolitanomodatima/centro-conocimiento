@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useSesion } from '@/controllers/useSesion';
 import { tienePermiso } from '@/types/sesion';
 import { urlLogin } from '@/services/sesion';
@@ -12,6 +12,7 @@ import ErrorMensaje from '@/components/ErrorMensaje';
 
 export default function EditarRecurso() {
   const { id = '' } = useParams();
+  const navigate = useNavigate();
   const { sesion, cargando: cargandoSesion } = useSesion();
   const [recurso, setRecurso] = useState<RecursoCompleto | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -78,7 +79,7 @@ export default function EditarRecurso() {
       <h1 className="mb-8 font-serif text-3xl font-bold text-tierra-900">
         Editar: {recurso.titulo}
       </h1>
-      <FormularioRecurso modoEdicion={modoEdicion} />
+      <FormularioRecurso modoEdicion={modoEdicion} onCancelar={() => navigate(`/recurso/${id}`)} />
     </div>
   );
 }

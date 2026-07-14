@@ -2,38 +2,38 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: argumentario
-resumen:
+resumen: ''
 
-tema:
-subtema:
+tema: []
+subtema: ''
 
-territorio:
+territorio: []
 
 estado: vigente
 
-autor:
-revisores:
+autor: ''
+revisores: []
 
-fecha_creacion:
-ultima_actualizacion:
+fecha_creacion: ''
+ultima_actualizacion: ''
 
-etiquetas:
+etiquetas: []
 
-relacionados:
+relacionados: []
 
-adjuntos:
+adjuntos: []
 
-fuentes:
+fuentes: []
 
 nivel: basico
 
 publico:
   - militancia
 
-licencia:
+licencia: ''
 ---
 ```
 

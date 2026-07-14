@@ -2,28 +2,28 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: caso
 
-territorio:
+territorio: []
 
-tema:
+tema: []
 
-estado:
+estado: ''
 
-actores:
+actores: []
 
-fecha_inicio:
-fecha_fin:
+fecha_inicio: ''
+fecha_fin: ''
 
-etiquetas:
+etiquetas: []
 
-relacionados:
+relacionados: []
 
-adjuntos:
+adjuntos: []
 
-fuentes:
+fuentes: []
 ---
 ```
 

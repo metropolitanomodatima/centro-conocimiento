@@ -2,25 +2,25 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: persona
 
-nombre:
+nombre: ''
 
-cargo:
+cargo: ''
 
-organizacion:
+organizacion: ''
 
-territorio:
+territorio: []
 
-etiquetas:
+etiquetas: []
 
-relacionados:
+relacionados: []
 
-fotografia:
+fotografia: ''
 
-fuentes:
+fuentes: []
 ---
 ```
 

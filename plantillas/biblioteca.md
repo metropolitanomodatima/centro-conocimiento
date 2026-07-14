@@ -2,32 +2,32 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: biblioteca
 
-resumen:
+resumen: ''
 
-autor:
+autor: ''
 
-editorial:
+editorial: ''
 
-fecha_publicacion:
-ultima_actualizacion:
+fecha_publicacion: ''
+ultima_actualizacion: ''
 
-enlace:
+enlace: ''
 
-tema:
+tema: []
 
-etiquetas:
+etiquetas: []
 
-estado:
+estado: ''
 
-relacionados:
+relacionados: []
 
-adjuntos:
+adjuntos: []
 
-fuentes:
+fuentes: []
 ---
 ```
 

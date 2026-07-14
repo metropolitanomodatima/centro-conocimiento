@@ -2,30 +2,30 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: ley
 
-numero:
+numero: ''
 
-pais:
+pais: ''
 
-estado:
+estado: ''
 
-organismo:
+organismo: ''
 
-fecha_publicacion:
-ultima_actualizacion:
+fecha_publicacion: ''
+ultima_actualizacion: ''
 
-enlace:
+enlace: ''
 
-etiquetas:
+etiquetas: []
 
-relacionados:
+relacionados: []
 
-adjuntos:
+adjuntos: []
 
-fuentes:
+fuentes: []
 ---
 ```
 

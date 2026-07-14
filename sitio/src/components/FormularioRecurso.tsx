@@ -1,17 +1,182 @@
+import { useEffect, useRef, useState } from 'react';
 import { CATEGORIAS } from '@/types/recurso';
+import type { EntradaIndice } from '@/types/recurso';
 import type { PayloadRecurso } from '@/services/recursoEditor';
 import { useFormularioRecurso } from '@/controllers/useFormularioRecurso';
+import { cargarIndice } from '@/services/indice';
 
-const CAMPOS_BASE = new Set(['id', 'titulo', 'tipo', 'resumen']);
+const CAMPOS_BASE = new Set(['id', 'titulo', 'tipo', 'resumen', 'relacionados']);
 
 interface Props {
   modoEdicion?: PayloadRecurso;
+  onCancelar?: () => void;
 }
 
-export default function FormularioRecurso({ modoEdicion }: Props) {
+// ── Campo de lista (chips) ─────────────────────────────────────────────────
+function CampoLista({
+  nombre, valores, onChange,
+}: { nombre: string; valores: string[]; onChange: (v: string[]) => void }) {
+  const [input, setInput] = useState('');
+
+  function agregar() {
+    const v = input.trim();
+    if (v && !valores.includes(v)) onChange([...valores, v]);
+    setInput('');
+  }
+
+  return (
+    <div>
+      <div className="flex flex-wrap gap-1.5 mb-2">
+        {valores.map((v) => (
+          <span
+            key={v}
+            className="inline-flex items-center gap-1 rounded-full bg-tierra-100 px-2.5 py-0.5 text-xs text-tierra-700"
+          >
+            {v}
+            <button
+              type="button"
+              onClick={() => onChange(valores.filter((x) => x !== v))}
+              className="text-tierra-400 hover:text-red-500 leading-none"
+              aria-label={`Quitar ${v}`}
+            >
+              ×
+            </button>
+          </span>
+        ))}
+      </div>
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); agregar(); } }}
+          placeholder={`Agregar ${nombre}…`}
+          className="flex-1 rounded-md border border-tierra-300 px-3 py-1.5 text-sm focus:border-rio-500 focus:outline-none"
+        />
+        <button
+          type="button"
+          onClick={agregar}
+          disabled={!input.trim()}
+          className="rounded-md border border-tierra-300 px-3 py-1.5 text-sm text-tierra-600 hover:border-rio-400 hover:text-rio-700 disabled:opacity-40"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── Selector de recursos relacionados ─────────────────────────────────────
+function SelectorRelacionados({
+  seleccionados, onChange,
+}: { seleccionados: string[]; onChange: (ids: string[]) => void }) {
+  const [busqueda, setBusqueda] = useState('');
+  const [resultados, setResultados] = useState<EntradaIndice[]>([]);
+  const [todos, setTodos] = useState<EntradaIndice[]>([]);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    cargarIndice().then((idx) => setTodos(idx.recursos)).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const q = busqueda.trim().toLowerCase();
+    if (!q) { setResultados([]); return; }
+    const selSet = new Set(seleccionados);
+    setResultados(
+      todos
+        .filter((r) => !selSet.has(r.id) && (r.titulo.toLowerCase().includes(q) || r.id.toLowerCase().includes(q)))
+        .slice(0, 8)
+    );
+  }, [busqueda, todos, seleccionados]);
+
+  const seleccionadosInfo = seleccionados
+    .map((id) => todos.find((r) => r.id === id))
+    .filter((r): r is EntradaIndice => r !== undefined);
+
+  function agregar(r: EntradaIndice) {
+    onChange([...seleccionados, r.id]);
+    setBusqueda('');
+    setResultados([]);
+    inputRef.current?.focus();
+  }
+
+  function quitar(id: string) {
+    onChange(seleccionados.filter((x) => x !== id));
+  }
+
+  return (
+    <div>
+      <div className="flex flex-wrap gap-1.5 mb-2">
+        {seleccionadosInfo.map((r) => (
+          <span
+            key={r.id}
+            className="inline-flex items-center gap-1 rounded-full bg-rio-100 px-2.5 py-0.5 text-xs text-rio-800"
+          >
+            {r.titulo}
+            <button
+              type="button"
+              onClick={() => quitar(r.id)}
+              className="text-rio-400 hover:text-red-500 leading-none"
+              aria-label={`Quitar ${r.titulo}`}
+            >
+              ×
+            </button>
+          </span>
+        ))}
+        {seleccionados.filter((id) => !todos.find((r) => r.id === id)).map((id) => (
+          <span
+            key={id}
+            className="inline-flex items-center gap-1 rounded-full bg-tierra-100 px-2.5 py-0.5 text-xs text-tierra-500"
+          >
+            {id}
+            <button
+              type="button"
+              onClick={() => quitar(id)}
+              className="hover:text-red-500 leading-none"
+              aria-label={`Quitar ${id}`}
+            >
+              ×
+            </button>
+          </span>
+        ))}
+      </div>
+      <div className="relative">
+        <input
+          ref={inputRef}
+          type="text"
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          placeholder="Buscar recurso por título o id…"
+          className="w-full rounded-md border border-tierra-300 px-3 py-1.5 text-sm focus:border-rio-500 focus:outline-none"
+        />
+        {resultados.length > 0 && (
+          <ul className="absolute left-0 right-0 top-full z-10 mt-1 overflow-hidden rounded-lg border border-tierra-200 bg-white shadow-lg">
+            {resultados.map((r) => (
+              <li key={r.id}>
+                <button
+                  type="button"
+                  onMouseDown={(e) => { e.preventDefault(); agregar(r); }}
+                  className="flex w-full flex-col px-3 py-2 text-left hover:bg-tierra-50"
+                >
+                  <span className="text-sm font-medium text-tierra-900">{r.titulo}</span>
+                  <span className="text-xs text-tierra-400">{r.id}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── Formulario principal ───────────────────────────────────────────────────
+export default function FormularioRecurso({ modoEdicion, onCancelar }: Props) {
   const {
     estado, plantillaActual,
-    setTipo, setSlug, setTitulo, setResumen, setCuerpo, setCampoExtra,
+    setTipo, setSlug, setTitulo, setResumen, setCuerpo,
+    setCampoTexto, setCampoLista, setRelacionados,
     enviando, error, prUrl, submit,
   } = useFormularioRecurso(modoEdicion);
 
@@ -32,7 +197,9 @@ export default function FormularioRecurso({ modoEdicion }: Props) {
     );
   }
 
-  const camposExtras = plantillaActual?.campos.filter((c) => !CAMPOS_BASE.has(c.nombre)) ?? [];
+  const camposExtra = plantillaActual?.campos.filter((c) => !CAMPOS_BASE.has(c.nombre)) ?? [];
+  const camposTextoPlantilla = camposExtra.filter((c) => c.tipo !== 'lista');
+  const camposListaPlantilla = camposExtra.filter((c) => c.tipo === 'lista');
 
   return (
     <form
@@ -97,39 +264,6 @@ export default function FormularioRecurso({ modoEdicion }: Props) {
         />
       </div>
 
-      {/* Campos extra del tipo */}
-      {camposExtras.length > 0 && (
-        <div className="space-y-4 rounded-lg border border-tierra-100 bg-tierra-50 p-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-tierra-500">
-            Metadatos de {estado.tipo}
-          </p>
-          {camposExtras.map((campo) => (
-            <div key={campo.nombre}>
-              <label className="mb-1 block text-sm font-medium text-tierra-700">
-                {campo.nombre}{campo.requerido ? ' *' : ''}
-              </label>
-              {campo.tipo === 'textarea' ? (
-                <textarea
-                  value={estado.camposExtra[campo.nombre] ?? ''}
-                  onChange={(e) => setCampoExtra(campo.nombre, e.target.value)}
-                  rows={3}
-                  required={campo.requerido}
-                  className="w-full rounded-md border border-tierra-300 px-3 py-2 text-sm"
-                />
-              ) : (
-                <input
-                  type={campo.tipo === 'fecha' ? 'date' : 'text'}
-                  value={estado.camposExtra[campo.nombre] ?? ''}
-                  onChange={(e) => setCampoExtra(campo.nombre, e.target.value)}
-                  required={campo.requerido}
-                  className="w-full rounded-md border border-tierra-300 px-3 py-2 text-sm"
-                />
-              )}
-            </div>
-          ))}
-        </div>
-      )}
-
       {/* Cuerpo */}
       <div>
         <label className="mb-1 block text-sm font-medium text-tierra-800">
@@ -144,19 +278,96 @@ export default function FormularioRecurso({ modoEdicion }: Props) {
         />
       </div>
 
+      {/* Campos de texto del tipo */}
+      {camposTextoPlantilla.length > 0 && (
+        <div className="space-y-4 rounded-lg border border-tierra-100 bg-tierra-50 p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-tierra-500">
+            Metadatos de {estado.tipo}
+          </p>
+          {camposTextoPlantilla.map((campo) => (
+            <div key={campo.nombre}>
+              <label className="mb-1 block text-sm font-medium text-tierra-700">
+                {campo.nombre}{campo.requerido ? ' *' : ''}
+              </label>
+              {campo.tipo === 'textarea' ? (
+                <textarea
+                  value={estado.camposTexto[campo.nombre] ?? ''}
+                  onChange={(e) => setCampoTexto(campo.nombre, e.target.value)}
+                  rows={3}
+                  required={campo.requerido}
+                  className="w-full rounded-md border border-tierra-300 px-3 py-2 text-sm"
+                />
+              ) : (
+                <input
+                  type={campo.tipo === 'fecha' ? 'date' : 'text'}
+                  value={estado.camposTexto[campo.nombre] ?? ''}
+                  onChange={(e) => setCampoTexto(campo.nombre, e.target.value)}
+                  required={campo.requerido}
+                  className="w-full rounded-md border border-tierra-300 px-3 py-2 text-sm"
+                />
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Campos de lista del tipo */}
+      {camposListaPlantilla.length > 0 && (
+        <div className="space-y-4 rounded-lg border border-tierra-100 bg-tierra-50 p-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-tierra-500">
+            Listas de {estado.tipo}
+          </p>
+          {camposListaPlantilla.map((campo) => (
+            <div key={campo.nombre}>
+              <label className="mb-1 block text-sm font-medium text-tierra-700">
+                {campo.nombre}
+              </label>
+              <CampoLista
+                nombre={campo.nombre}
+                valores={estado.camposLista[campo.nombre] ?? []}
+                onChange={(v) => setCampoLista(campo.nombre, v)}
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Recursos relacionados */}
+      <div className="rounded-lg border border-tierra-100 bg-tierra-50 p-4">
+        <label className="mb-2 block text-xs font-semibold uppercase tracking-wide text-tierra-500">
+          Recursos relacionados
+        </label>
+        <SelectorRelacionados
+          seleccionados={estado.relacionados}
+          onChange={setRelacionados}
+        />
+      </div>
+
       {error && (
         <p className="rounded-md border border-red-200 bg-red-50 px-4 py-2 text-sm text-red-700">
           {error}
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={enviando}
-        className="rounded-md bg-rio-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-rio-700 disabled:opacity-50"
-      >
-        {enviando ? 'Enviando…' : modoEdicion ? 'Guardar cambios' : 'Crear recurso'}
-      </button>
+      <div className="flex items-center gap-3">
+        <button
+          type="submit"
+          disabled={enviando}
+          className="rounded-md bg-rio-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-rio-700 disabled:opacity-50"
+        >
+          {enviando ? 'Enviando…' : modoEdicion ? 'Guardar cambios' : 'Crear recurso'}
+        </button>
+        {onCancelar && (
+          <button
+            type="button"
+            onClick={onCancelar}
+            disabled={enviando}
+            className="rounded-md border border-tierra-300 px-6 py-2.5 text-sm font-semibold text-tierra-600 hover:border-tierra-400 hover:text-tierra-800 disabled:opacity-50"
+          >
+            Cancelar
+          </button>
+        )}
+      </div>
     </form>
   );
 }

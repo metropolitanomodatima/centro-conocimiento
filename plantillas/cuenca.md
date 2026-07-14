@@ -2,44 +2,44 @@
 
 ```yaml
 ---
-id:
-titulo:
+id: ''
+titulo: ''
 tipo: cuenca
 
-nombre:
+nombre: ''
 
-region:
-comunas:
+region: ''
+comunas: []
 
-rio_principal:
+rio_principal: ''
 
-superficie:
+superficie: ''
 
-ecosistemas:
+ecosistemas: []
 
-territorios:
+territorios: []
 
-comunidades:
+comunidades: []
 
-organizaciones:
+organizaciones: []
 
-casos:
+casos: []
 
-campañas:
+campañas: []
 
-legislacion:
+legislacion: []
 
-datos:
+datos: []
 
-mapas:
+mapas: []
 
-etiquetas:
+etiquetas: []
 
-relacionados:
+relacionados: []
 
-adjuntos:
+adjuntos: []
 
-fuentes:
+fuentes: []
 ---
 ```
 

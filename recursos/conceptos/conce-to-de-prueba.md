@@ -2,7 +2,7 @@
 id: concepto.conce-to-de-prueba
 titulo: Concepto de prueba
 tipo: concepto
-resumen: Concepto de prueba
+resumen: Este es una modificación al concepto de prueba
 ---
 
 ## Definición

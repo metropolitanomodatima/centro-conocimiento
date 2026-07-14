@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import type { RecursoCompleto } from '@/types/recurso';
+import { cargarIndice } from '@/services/indice';
 import Etiqueta from './Etiqueta';
 
 interface Props {
@@ -15,6 +17,17 @@ function Fila({ etiqueta, children }: { etiqueta: string; children: React.ReactN
 }
 
 export default function Metadatos({ recurso }: Props) {
+  const [nombresPorId, setNombresPorId] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    if (recurso.tipo !== 'conflicto' || recurso.territorios.length === 0) return;
+    cargarIndice().then((idx) => {
+      const mapa: Record<string, string> = {};
+      for (const r of idx.recursos) mapa[r.id] = r.titulo;
+      setNombresPorId(mapa);
+    }).catch(() => {});
+  }, [recurso.tipo, recurso.territorios]);
+
   return (
     <aside
       aria-label="Metadatos del recurso"
@@ -42,26 +55,26 @@ export default function Metadatos({ recurso }: Props) {
         )}
         {recurso.licencia && <Fila etiqueta="Licencia">{recurso.licencia}</Fila>}
 
-        {recurso.temas.length > 0 && (
-          <Fila etiqueta="Temas">
-            <div className="flex flex-wrap gap-1.5">
-              {recurso.temas.map((t) => (
-                <Etiqueta key={t} texto={t} tipo="tema" href={`/buscar?tema=${encodeURIComponent(t)}`} />
-              ))}
-            </div>
-          </Fila>
-        )}
-
         {recurso.territorios.length > 0 && (
           <Fila etiqueta="Territorios">
             <div className="flex flex-wrap gap-1.5">
               {recurso.territorios.map((t) => (
                 <Etiqueta
                   key={t}
-                  texto={t}
+                  texto={nombresPorId[t] ?? t}
                   tipo="territorio"
-                  href={`/buscar?territorio=${encodeURIComponent(t)}`}
+                  href={`/recurso/${encodeURIComponent(t)}`}
                 />
+              ))}
+            </div>
+          </Fila>
+        )}
+
+        {recurso.temas.length > 0 && (
+          <Fila etiqueta="Temas">
+            <div className="flex flex-wrap gap-1.5">
+              {recurso.temas.map((t) => (
+                <Etiqueta key={t} texto={t} tipo="tema" href={`/buscar?tema=${encodeURIComponent(t)}`} />
               ))}
             </div>
           </Fila>
@@ -82,7 +95,11 @@ export default function Metadatos({ recurso }: Props) {
             <ul className="space-y-1 list-disc pl-4">
               {recurso.fuentes.map((f) => (
                 <li key={f} className="break-words">
-                  {f}
+                  {/^https?:\/\//.test(f.trim()) ? (
+                    <a href={f.trim()} target="_blank" rel="noopener noreferrer" className="text-rio-700 underline hover:text-rio-500 break-all">
+                      {f.trim()}
+                    </a>
+                  ) : f}
                 </li>
               ))}
             </ul>

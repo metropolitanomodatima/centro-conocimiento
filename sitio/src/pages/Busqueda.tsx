@@ -8,6 +8,8 @@ import FilaRecurso from '@/components/FilaRecurso';
 import ToggleVista from '@/components/ToggleVista';
 import { CATEGORIAS } from '@/types/recurso';
 import type { EntradaIndice, TipoRecurso } from '@/types/recurso';
+
+const TIPOS_PUBLICOS = new Set(['concepto', 'territorio', 'cuenca', 'ley', 'conflicto']);
 import { buscar, type FiltrosBusqueda } from '@/services/busqueda';
 import { cargarIndice, extraerFacetas, extraerRegiones } from '@/services/indice';
 import { useTiposVisibles } from '@/controllers/useTiposVisibles';
@@ -103,8 +105,13 @@ export default function Busqueda() {
             <h2 className="mb-2 text-xs font-semibold uppercase tracking-widest text-tierra-500">
               Tipo de recurso
             </h2>
-            <ul className="space-y-1">
-              {CATEGORIAS.filter((c) => tiposVisibles == null ? true : (tiposVisibles as string[]).includes(c.tipo)).map((c) => {
+            {(() => {
+              const categoriasFiltradas = CATEGORIAS.filter((c) =>
+                tiposVisibles == null ? true : (tiposVisibles as string[]).includes(c.tipo)
+              );
+              const publicas = categoriasFiltradas.filter((c) => TIPOS_PUBLICOS.has(c.tipo));
+              const privadas = categoriasFiltradas.filter((c) => !TIPOS_PUBLICOS.has(c.tipo));
+              const renderBtn = (c: typeof CATEGORIAS[0]) => {
                 const activo = tipos.includes(c.tipo);
                 const total = todos ? todos.filter((r) => r.tipo === c.tipo).length : null;
                 return (
@@ -116,7 +123,9 @@ export default function Busqueda() {
                         'w-full text-left rounded-md px-2 py-1 text-sm transition flex justify-between',
                         activo
                           ? 'bg-rio-100 text-rio-800 font-semibold'
-                          : 'text-tierra-700 hover:bg-tierra-100',
+                          : TIPOS_PUBLICOS.has(c.tipo)
+                            ? 'text-tierra-700 hover:bg-tierra-100'
+                            : 'bg-rio-50 text-rio-700 hover:bg-rio-100',
                       ].join(' ')}
                     >
                       <span>{c.etiquetaPlural}</span>
@@ -124,8 +133,19 @@ export default function Busqueda() {
                     </button>
                   </li>
                 );
-              })}
-            </ul>
+              };
+              return (
+                <>
+                  <ul className="space-y-1">{publicas.map(renderBtn)}</ul>
+                  {privadas.length > 0 && (
+                    <>
+                      <div className="my-2 h-px bg-tierra-200" />
+                      <ul className="space-y-1">{privadas.map(renderBtn)}</ul>
+                    </>
+                  )}
+                </>
+              );
+            })()}
           </section>
 
           {facetas && facetas.temas.length > 0 && (

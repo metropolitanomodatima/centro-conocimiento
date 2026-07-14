@@ -93,7 +93,7 @@ export default function Menu() {
                       'whitespace-nowrap px-3 py-1.5 rounded-full border transition no-underline',
                       isActive
                         ? 'border-rio-500 bg-rio-50 text-rio-800 font-semibold'
-                        : 'border-rio-400 bg-rio-600 text-white hover:bg-rio-700 hover:border-rio-700',
+                        : 'border-rio-300 bg-rio-50 text-rio-700 hover:bg-rio-100 hover:border-rio-400',
                     ].join(' ')
                   }
                 >

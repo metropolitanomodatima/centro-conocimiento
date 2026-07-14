@@ -1,28 +1,23 @@
 ---
-id: territorio.lo-barnechea
-titulo: MODATIMA Lo Barnechea
-tipo: territorio
-
 pais: Chile
 region: Metropolitana
 provincia: Santiago
 comuna: Lo Barnechea
-
 temas:
   - agua
   - glaciares
   - minería
   - hidroelectricidad
-  - Región Metropolitana
   - cordillera
   - Andes centrales
+adjuntos:
 
 relacionados:
   - territorio.santiago
   - argumentario.agua-derecho-humano
-
-adjuntos:
-
+titulo: MODATIMA Lo Barnechea
+tipo: territorio
+resumen: 
 ---
 
 ## Descripción general

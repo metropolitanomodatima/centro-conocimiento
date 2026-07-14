@@ -13,7 +13,7 @@ relacionados:
   - concepto.derecho-humano-agua
 titulo: MODATIMA
 tipo: organizacion
-resumen: 
+resumen: Movimiento de Defensa por el Acceso al Agua, la Tierra y la Protección del Medioambiente
 ---
 
 ## Descripción

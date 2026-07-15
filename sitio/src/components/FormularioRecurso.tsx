@@ -289,7 +289,7 @@ export default function FormularioRecurso({ modoEdicion, onCancelar }: Props) {
       {/* Tipo */}
       {!modoEdicion && (
         <div>
-          <label className="mb-1 block text-sm font-medium text-tierra-800">Tipo de recurso *</label>
+          <label className="mb-1 block text-sm font-medium text-tierra-800">Tipo de saber *</label>
           <select
             value={estado.tipo}
             onChange={(e) => setTipo(e.target.value)}
@@ -315,7 +315,7 @@ export default function FormularioRecurso({ modoEdicion, onCancelar }: Props) {
             onChange={(e) => setSlug(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, '-'))}
             pattern="[a-z0-9-]+"
             required
-            placeholder="nombre-del-recurso"
+            placeholder="nombre-del-saber"
             className="w-full rounded-md border border-tierra-300 px-3 py-2 text-sm focus:border-rio-500 focus:outline-none"
           />
         </div>
@@ -352,8 +352,8 @@ export default function FormularioRecurso({ modoEdicion, onCancelar }: Props) {
         <textarea
           value={estado.cuerpo}
           onChange={(e) => setCuerpo(e.target.value)}
-          rows={20}
-          className="w-full rounded-md border border-tierra-300 px-3 py-2 font-mono text-sm focus:border-rio-500 focus:outline-none"
+          rows={10}
+          className="w-full min-h-[16rem] sm:min-h-[32rem] rounded-md border border-tierra-300 px-3 py-2 font-mono text-sm focus:border-rio-500 focus:outline-none"
           placeholder="Escribe el contenido en formato Markdown…"
         />
       </div>

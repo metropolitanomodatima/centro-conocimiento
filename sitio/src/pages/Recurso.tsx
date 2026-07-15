@@ -73,7 +73,7 @@ export default function Recurso() {
   const categoria = buscarCategoria(recurso.tipo);
 
   return (
-    <article className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
+    <article className="grid gap-6 lg:gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
       <div className="min-w-0">
         <nav aria-label="Migas" className="mb-4 text-sm text-tierra-500">
           <Link to="/" className="hover:text-rio-700">
@@ -110,7 +110,7 @@ export default function Recurso() {
               </button>
             )}
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold leading-tight text-tierra-900">
+          <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-tierra-900">
             {recurso.titulo}
           </h1>
           {recurso.resumen && (

@@ -22,6 +22,7 @@ export interface EntradaIndice {
   relacionados: string[];
   fuentes: string[];
   adjuntos: string[];
+  actores: string[];
   nivel: string | null;
   publico: string[];
   licencia: string | null;

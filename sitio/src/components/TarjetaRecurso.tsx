@@ -11,12 +11,12 @@ interface Props {
 export default function TarjetaRecurso({ recurso, compacta = false }: Props) {
   const categoria = buscarCategoria(recurso.tipo);
   return (
-    <article className="group relative flex h-full flex-col rounded-xl border border-tierra-200 bg-white p-5 shadow-sm transition hover:border-rio-400 hover:shadow-md">
+    <article className="group relative flex h-full flex-col rounded-xl border border-tierra-200 bg-white p-4 sm:p-5 shadow-sm transition hover:border-rio-400 hover:shadow-md">
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <Etiqueta texto={categoria?.etiqueta ?? recurso.tipo} tipo="tipo" />
       </div>
 
-      <h3 className="font-serif text-lg font-semibold leading-snug text-tierra-900">
+      <h3 className="font-serif text-base sm:text-lg font-semibold leading-snug text-tierra-900">
         <Link
           to={`/recurso/${encodeURIComponent(recurso.id)}`}
           className="no-underline before:absolute before:inset-0 group-hover:text-rio-700"

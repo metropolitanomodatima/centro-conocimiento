@@ -54,22 +54,22 @@
     @apply font-serif text-tierra-900 leading-relaxed;
   }
   .prosa h1 {
-    @apply text-3xl font-bold mt-6 mb-4;
+    @apply text-2xl sm:text-3xl font-bold mt-6 mb-4;
   }
   .prosa h2 {
-    @apply text-2xl font-bold mt-8 mb-3 border-b border-tierra-200 pb-1;
+    @apply text-xl sm:text-2xl font-bold mt-8 mb-3 border-b border-tierra-200 pb-1;
   }
   .prosa h3 {
-    @apply text-xl font-semibold mt-6 mb-2;
+    @apply text-lg sm:text-xl font-semibold mt-6 mb-2;
   }
   .prosa p {
     @apply my-4;
   }
   .prosa ul {
-    @apply list-disc pl-6 my-4 space-y-1;
+    @apply list-disc pl-5 sm:pl-6 my-4 space-y-1;
   }
   .prosa ol {
-    @apply list-decimal pl-6 my-4 space-y-1;
+    @apply list-decimal pl-5 sm:pl-6 my-4 space-y-1;
   }
   .prosa a {
     @apply text-rio-700 underline hover:text-rio-500;
@@ -84,7 +84,7 @@
     @apply bg-tierra-800 text-tierra-50 rounded-lg p-4 overflow-x-auto my-4;
   }
   .prosa table {
-    @apply w-full border-collapse my-4 text-sm;
+    @apply block w-full overflow-x-auto border-collapse my-4 text-sm;
   }
   .prosa th,
   .prosa td {

@@ -47,11 +47,11 @@ export default function Portada() {
             <rect width="200" height="200" fill="url(#lineas)" />
           </svg>
         </div>
-        <div className="relative px-5 py-10 sm:px-12 sm:py-20 max-w-3xl">
+        <div className="relative px-4 py-8 sm:px-12 sm:py-20 max-w-none sm:max-w-3xl">
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-white/70">
             Biblioteca digital viva
           </p>
-          <h1 className="font-serif text-3xl sm:text-5xl font-bold leading-tight">
+          <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
             Conocimiento para la justicia socioambiental
           </h1>
           <p className="mt-4 text-lg text-white/90 leading-relaxed">
@@ -79,7 +79,7 @@ export default function Portada() {
             Ver todo →
           </Link>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {CATEGORIAS_PORTADA.filter((tipo) => !tiposVisibles || (tiposVisibles as string[]).includes(tipo)).map((tipo) => {
             const c = buscarCategoria(tipo)!;
             const total = indice.por_tipo[tipo] ?? 0;
@@ -107,7 +107,7 @@ export default function Portada() {
               Recursos destacados
             </h2>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {filtrar(top).map((r) => (
               <TarjetaRecurso key={r.id} recurso={r} />
             ))}
@@ -125,7 +125,7 @@ export default function Portada() {
               Buscador avanzado →
             </Link>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filtrar(ultimos).map((r) => (
               <TarjetaRecurso key={r.id} recurso={r} />
             ))}

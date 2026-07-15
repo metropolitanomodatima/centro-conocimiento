@@ -215,6 +215,7 @@ async function main() {
       relacionados,
       fuentes: normalizarLista(datos.fuentes),
       adjuntos: normalizarLista(datos.adjuntos),
+      actores: normalizarLista(datos.actores),
       nivel: normalizarTexto(datos.nivel) || null,
       publico: normalizarLista(datos.publico),
       licencia: normalizarTexto(datos.licencia) || null,

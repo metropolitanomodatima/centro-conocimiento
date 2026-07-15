@@ -31,14 +31,14 @@ export default function Menu() {
             BS
           </span>
           <span className="leading-tight">
-            <span className="block font-serif text-lg font-bold text-tierra-900">
+            <span className="block font-serif text-base sm:text-lg font-bold text-tierra-900">
               Biblioteca de Saberes
             </span>
             <span className="block text-xs uppercase tracking-widest text-rio-700">MODATIMA</span>
           </span>
         </Link>
 
-        <div className="flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-3">
           <nav aria-label="Principal" className="flex flex-wrap items-center gap-1 text-sm">
             {enlacesPrincipales.map((e) => (
               <NavLink
@@ -63,7 +63,7 @@ export default function Menu() {
       </div>
 
       <div className="border-t border-tierra-100 bg-white">
-        <div className="contenedor sin-scrollbar flex gap-2 overflow-x-auto py-2 text-xs">
+        <div className="contenedor sin-scrollbar flex gap-2 overflow-x-auto py-2 text-sm">
           {categoriasFiltradas.filter((c) => TIPOS_PUBLICOS.has(c.tipo)).map((c) => (
             <NavLink
               key={c.tipo}

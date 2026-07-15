@@ -58,9 +58,13 @@ export default function UsuarioMenu() {
       {sesion.rol !== 'militancia' && (
         <Link
           to="/nuevo"
-          className="rounded-md bg-rio-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-rio-700 no-underline"
+          aria-label="Sembrar saber"
+          className="inline-flex items-center justify-center gap-1.5 rounded-full bg-alerce-600 text-white shadow-sm ring-1 ring-alerce-700/20 hover:bg-alerce-700 hover:shadow-md transition no-underline h-9 w-9 sm:h-auto sm:w-auto sm:rounded-md sm:px-3 sm:py-1.5 sm:text-sm sm:font-medium"
         >
-          + Nuevo recurso
+          <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden>
+            <path d="M8 3v10M3 8h10" strokeLinecap="round" />
+          </svg>
+          <span className="hidden sm:inline">Sembrar saber</span>
         </Link>
       )}
       <div className="relative" ref={menuRef}>

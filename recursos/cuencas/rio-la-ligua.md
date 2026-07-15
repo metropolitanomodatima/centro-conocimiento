@@ -4,29 +4,20 @@ titulo: Cuenca del río La Ligua
 tipo: cuenca
 
 region: Valparaíso
-# fuente: https://es.wikipedia.org/wiki/Cuenca_del_r%C3%ADo_La_Ligua
-
-# fuente: https://es.wikipedia.org/wiki/R%C3%ADo_La_Ligua
-
-# fuente: http://modatima.cl/2018/07/13/robo-agua-petorca-quien-realmente-dana-mas-al-pais/
-  - Junta de Vigilancia del Río La Ligua
-
-conflictos:
-  - Denuncia de robo de agua por MODATIMA (2012) — drenes ilegales en La Ligua y Petorca
-  - Concentración de derechos en cuatro familias exportadoras de paltas
-  - Amenazas de muerte a voceros de MODATIMA tras reportaje Danwatch
-  - Misión INDH 2014 constata desigualdad (cerros verdes con paltos vs. valles secos)
-# fuente: https://observatorio.cl/vocero-modatima-amenazado-muerte-tras-participar-reportaje-revela-usurpacion-agua-petorca/
-# fuente: http://modatima.cl/2017/03/22/paltas-y-agua-robada-reportaje-de-danwatch/
-
-# fuente: https://dga.mop.gob.cl/derechos-de-agua/proteccion-de-las-fuentes/decretos-de-escasez-2/
-
-# fuente: https://www.scielo.sa.cr/scielo.php?script=sci_arttext&pid=S2215-24662018000100159
-# fuente: https://mma.gob.cl/wp-content/uploads/2017/12/LaLigua.pdf
 
 relacionados:
 
 adjuntos:
+
+fuentes:
+  - https://es.wikipedia.org/wiki/Cuenca_del_r%C3%ADo_La_Ligua
+  - https://es.wikipedia.org/wiki/R%C3%ADo_La_Ligua
+  - http://modatima.cl/2018/07/13/robo-agua-petorca-quien-realmente-dana-mas-al-pais/
+  - https://observatorio.cl/vocero-modatima-amenazado-muerte-tras-participar-reportaje-revela-usurpacion-agua-petorca/
+  - http://modatima.cl/2017/03/22/paltas-y-agua-robada-reportaje-de-danwatch/
+  - https://dga.mop.gob.cl/derechos-de-agua/proteccion-de-las-fuentes/decretos-de-escasez-2/
+  - https://www.scielo.sa.cr/scielo.php?script=sci_arttext&pid=S2215-24662018000100159
+  - https://mma.gob.cl/wp-content/uploads/2017/12/LaLigua.pdf
 
 ---
 

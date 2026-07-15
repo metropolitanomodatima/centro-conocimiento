@@ -42,9 +42,9 @@ export default function Nuevo() {
       <nav className="mb-6 text-sm text-tierra-500">
         <Link to="/" className="hover:text-rio-700">Inicio</Link>
         <span className="mx-2">›</span>
-        <span>Nuevo recurso</span>
+        <span>Sembrar saber</span>
       </nav>
-      <h1 className="mb-8 font-serif text-3xl font-bold text-tierra-900">Nuevo recurso</h1>
+      <h1 className="mb-8 font-serif text-3xl font-bold text-tierra-900">Sembrar saber</h1>
       <FormularioRecurso />
     </div>
   );

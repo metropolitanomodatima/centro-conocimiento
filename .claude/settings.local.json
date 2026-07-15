@@ -36,7 +36,9 @@
       "Bash(curl -s -A \"Mozilla/5.0\" \"https://es.wikipedia.org/wiki/Movimiento_No_Alto_Maipo\" -o /c/temp/noaltomaipo.html)",
       "WebSearch",
       "Bash(grep -v -E \"^\\(rio-maipo|rio-biobio|rio-loa|rio-maullin|rio-baker|rio-lluta|rio-petorca\\)\\\\.md$\")",
-      "Bash(grep -v -E \"^\\(rio-maipo|rio-biobio|rio-loa|rio-maullin|rio-baker\\)\\\\.md$\")"
+      "Bash(grep -v -E \"^\\(rio-maipo|rio-biobio|rio-loa|rio-maullin|rio-baker\\)\\\\.md$\")",
+      "Bash(grep -oE \"p[xy]?-[0-9]{1,2}\")",
+      "Bash(grep -oE \"gap-[0-9]{1,2}\")"
     ]
   }
 }

@@ -70,6 +70,16 @@ export default function Metadatos({ recurso }: Props) {
           </Fila>
         )}
 
+        {recurso.tipo === 'conflicto' && recurso.actores.length > 0 && (
+          <Fila etiqueta="Actores">
+            <ul className="space-y-1 list-disc pl-4">
+              {recurso.actores.map((a) => (
+                <li key={a} className="break-words">{a}</li>
+              ))}
+            </ul>
+          </Fila>
+        )}
+
         {recurso.temas.length > 0 && (
           <Fila etiqueta="Temas">
             <div className="flex flex-wrap gap-1.5">

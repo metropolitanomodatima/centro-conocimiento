@@ -12,7 +12,9 @@ temas:
   - encuentro
   - justicia ambiental
   - santiago
-adjuntos: []
+adjuntos:
+  - url: "https://drive.google.com/drive/folders/1IAfwf5arFgf_maGOexomoHAEkkE46tn0?usp=drive_link"
+    descripcion: Material del encuentro
 relacionados:
   - territorios/santiago
   - organizaciones/modatima

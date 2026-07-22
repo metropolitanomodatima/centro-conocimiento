@@ -9,9 +9,9 @@ tipo: evento
 nombre: ''
 
 fecha_inicio: ''
-fecha_fin: ''
-
 hora_inicio: ''
+
+fecha_fin: ''
 hora_fin: ''
 
 ubicacion: ''
